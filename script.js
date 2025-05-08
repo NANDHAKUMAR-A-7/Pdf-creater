@@ -2,13 +2,16 @@ const video = document.getElementById('video');
     const images = [];
 
     // Access the camera
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "envionment"} }, 
+      audio: false })
       .then(stream => {
         video.srcObject = stream;
       })
       .catch(err => {
         alert("Camera access denied.");
         console.error(err);
+      }).catch(err => {
+        alert("could not access camera" + err.message);
       });
 
     // Capture current frame
